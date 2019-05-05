@@ -1,0 +1,37 @@
+For parent-child communication, simply pass props.
+
+Use state to store the data your current page needs in your controller-view.
+
+Use props to pass data & event handlers down to your child components.
+
+These lists should help guide you when working with data in your components.
+
+Props
+
+are immutable
+which lets React do fast reference checks
+are used to pass data down from your view-controller
+your top level component
+have better performance
+use this to pass data to child components
+State
+
+should be managed in your view-controller
+your top level component
+is mutable
+has worse performance
+should not be accessed from child components
+pass it down with props instead
+For communication between two components that don't have a parent-child relationship, you can set up your own global event system. Subscribe to events in componentDidMount(), unsubscribe in componentWillUnmount(), and call setState() when you receive an event. Flux pattern is one of the possible ways to arrange this. - https://facebook.github.io/react/tips/communicate-between-components.html
+
+What Components Should Have State?
+
+Most of your components should simply take some data from props and render it. However, sometimes you need to respond to user input, a server request or the passage of time. For this you use state.
+
+Try to keep as many of your components as possible stateless. By doing this you'll isolate the state to its most logical place and minimize redundancy, making it easier to reason about your application.
+
+A common pattern is to create several stateless components that just render data, and have a stateful component above them in the hierarchy that passes its state to its children via props. The stateful component encapsulates all of the interaction logic, while the stateless components take care of rendering data in a declarative way. - https://facebook.github.io/react/docs/interactivity-and-dynamic-uis.html#what-components-should-have-state
+
+What Should Go in State?
+
+State should contain data that a component's event handlers may change to trigger a UI update. In real apps this data tends to be very small and JSON-serializable. When building a stateful component, think about the minimal possible representation of its state, and only store those properties in this.state. Inside of render() simply compute any other information you need based on this state. You'll find that thinking about and writing applications in this way tends to lead to the most correct application, since adding redundant or computed values to state means that you need to explicitly keep them in sync rather than rely on React computing them for you. - https://facebook.github.io/react/docs/interactivity-and-dynamic-uis.html#what-should-go-in-state
